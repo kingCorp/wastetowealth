@@ -1,25 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Route, BrowserRouter, Switch } from "react-router-dom";
 
-function App() {
+//pages
+import Home from './pages/home/home';
+import ErrorPage from './pages/error/error';
+
+//components
+import ScrollToTop from './components/scroll/scroll-to-top';
+
+const App = (props) => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Waste Management
-        </a>
-      </header>
-    </div>
+    <BrowserRouter basename="/">
+      <ScrollToTop />
+      <Switch>
+      <Route exact path="/" component={Home} />
+       
+        <Route exact path="*" component={ErrorPage} />
+      </Switch>
+    </BrowserRouter>
   );
-}
+};
+
+// const PrivateRoute = ({ component: Component, ...rest }) => (
+//   <Route
+//     {...rest}
+//     render={(props) =>
+//       Auth.isAuthenticated() ? (
+//         <Component {...props} />
+//       ) : (
+//         <Redirect
+//           to={{
+//             pathname: "/",
+//           }}
+//         />
+//       )
+//     }
+//   />
+// );
 
 export default App;
